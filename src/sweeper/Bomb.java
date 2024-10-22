@@ -22,7 +22,7 @@ public class Bomb {
 	}
 	
 	private void fixBombsCount() {
-		int maxBombs = Ranges.getSize().x * Ranges.getSize().y/2;
+		int maxBombs = (Ranges.getSize().x * Ranges.getSize().y)/2;
 		if(totalBombs > maxBombs) 
 			totalBombs = maxBombs;
 	}
@@ -46,9 +46,15 @@ public class Bomb {
 	// error 
 
 	private void incNumbersAroundBomb(Coord coord) {
-		for (Coord around : Ranges.getCoordsAround(coord))
+		for (Coord around : Ranges.getCoordsAround(coord)) {
 			if(Box.BOMB != bombMap.get (around))
 			bombMap.set(around, bombMap.get(around).getNextNumberBox());
+	}
+	}
+
+	 int getTotaslBombs() {
+
+		return totalBombs;
 	}
 
 }

@@ -42,12 +42,13 @@ public class JavaSweeper extends JFrame {
 		game = new Game(COLS, ROWS, BOMBS);
 		game.start();
 		setImeges();
+		initLabel();
 		initPanel();
 		initFrame();
 	}
 	
 	private void initLabel() {
-		label = new JLabel("Welcome");
+		label = new JLabel("Welcome!");
 		add(label, BorderLayout.SOUTH);
 	}
 
@@ -80,12 +81,24 @@ public class JavaSweeper extends JFrame {
 					game.pressRightButton (coord);
 				if(e.getButton() == MouseEvent.BUTTON2)
 					game.start();
+				label.setText(getMessage());
 				panel.repaint();
 			}
+
+		
 		});
 
 		panel.setPreferredSize(new Dimension(Ranges.getSize().x * IMAGE_SIZE, Ranges.getSize().y * IMAGE_SIZE));
 		add(panel);
+	}
+	private String getMessage() {
+		
+		switch (game.getState()) {
+		case PLAYED: return "Think twice!";
+		case BOMBED: return "You lose";
+		case WINNER: return "CONGRAGULETIONS!";
+		default  : return "Welcome!";
+		}
 	}
 
 	private void initFrame() {
